@@ -41,6 +41,6 @@ testem.log
 .DS_Store
 Thumbs.db
 
-# Exclude environments
-/src/environments/
-src/environments/
+# Exclude environment variables
+.env
+.env.local
