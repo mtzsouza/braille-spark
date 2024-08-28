@@ -1,0 +1,10 @@
+<div class="request-admin-panel">
+    <h2>Request Admin Privilege</h2>
+    <form (submit)="onSubmit()">
+        <div class="input-box">
+            <label for="request-code">Enter Request Code</label>
+            <input type="text" name="request-code" id="request-code" [(ngModel)]="formData.requestCode" required>
+        </div>
+        <input type="submit" value="Submit" class="submit">
+    </form>
+</div>

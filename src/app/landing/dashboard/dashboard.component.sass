@@ -1,0 +1,110 @@
+@import '../../../styles.sass'
+
+// Landing CSS
+.bg
+    position: fixed
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    background-image: url('../../../assets/landing-bg.jpg')
+    background-size: cover
+    background-position: center
+    display: flex
+    justify-content: center
+    align-items: center
+
+.panel
+    width: 70%
+    height: 80%
+    background-color: rgba($aegis-blue, 0.95)
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -55%)
+    border-radius: 20px
+
+.aegis-logo
+    position: absolute
+    bottom: 3%
+    left: 2%
+    width: 10%
+
+.braille-spark-logo
+    position: absolute
+    margin-top: -3%
+    right: 0
+    width: 15%
+
+// Dashboard CSS    
+.dashboard-panel
+    width: 70%
+    height: 80%
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+    border-radius: 20px
+    font-family: Jockey One
+    user-select: none
+    overflow: hidden
+    display: grid
+    grid-template-columns: repeat(2, 1fr)
+    grid-template-rows: 1fr
+    column-gap: 3%
+
+    .first-half
+        display: grid
+        grid-template-rows: 60% 33%
+        gap: 6%
+        border-radius: 30px
+
+    .second-half
+        display: grid
+        grid-template-rows: 33% 60%
+        gap: 6%
+        border-radius: 30px
+
+    .box
+        background-color: white
+        border-radius: 30px
+        cursor: pointer
+        text-wrap: nowrap
+        &:hover
+            transform: scale(0.95)
+            transition-duration: 200ms
+        &:not(:hover)
+            transform: scale(1)
+            transition-duration: 200ms
+
+    .big-box
+        .icon
+            width: 50%
+
+    .small-box
+        .icon
+            width: 28%
+
+    .icon-and-title
+        position: absolute
+        top: 50%
+        left: 50%
+        transform: translate(-50%, -30%)
+        display: flex
+        flex-direction: column
+        align-items: center
+        justify-content: center
+        font-size: small
+
+// For mobile screens
+@media only screen and (max-width: 850px)
+
+    .panel
+        width: 97%
+
+    .dashboard-panel
+        width: 97%
+        column-gap: 7%
+
+        .menu-title
+            font-size: 1.5em

@@ -1,0 +1,29 @@
+<app-navbar>
+    <div class="container">
+        <div class="settingsPanel">
+            <div class="title">
+                <h1>Account Settings</h1>
+            </div>
+            <div class="inputFields" (click)="changePanel('change-username')">
+                <img src="assets/Username.png" alt="username logo">
+                <h3> Change Username</h3>
+            </div>
+            <br>
+            <div class="inputFields" (click)="changePanel('change-password')">
+                <img src="assets/Password.png" alt="password logo">
+                <h3> Change Password</h3>
+            </div>
+            <br>
+            <div class="inputFields" (click)="changePanel('request-admin')">
+                <img src="assets/Question.png" alt="username logo">
+                <h3> Request Admin Privilege</h3>
+            </div>
+            <button class="signout" (click)="logout()" routerLink="/">Sign Out</button>
+        </div>
+        <div class="changingPanel">
+            <app-change-username *ngIf="currentPanel == 'change-username'"></app-change-username>
+            <app-change-password *ngIf="currentPanel == 'change-password'"></app-change-password>
+            <app-request-admin *ngIf="currentPanel == 'request-admin'"></app-request-admin>
+        </div>
+    </div>
+</app-navbar>

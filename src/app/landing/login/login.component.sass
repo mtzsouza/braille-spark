@@ -1,0 +1,64 @@
+@import '../../../styles.sass'
+
+.login-panel
+    width: 30%
+    height: 70%
+    background-color: white
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -55%)
+    border-radius: 20px
+    font-family: inter
+    display: flex
+    flex-direction: column
+    align-items: center
+    text-align: center
+    user-select: none
+
+    form
+        display: flex
+        flex-direction: column
+        gap: 20px
+
+        .input
+            display: flex
+            flex-direction: column
+
+        .text-input
+            padding: 8px 20px
+            border-radius: 15px
+            font-family: inter
+
+    .no-account
+        display: flex
+        flex-direction: column
+        position: absolute
+        bottom: 3%
+        font-size: small
+        margin: 2px
+
+        h4
+            margin: 4px
+
+.alert
+    position: absolute
+    bottom: 5%
+    left: 50%
+    width: 30%
+    height: 5%
+    background-color: #d00000
+    border-radius: 20px
+    transform: translate(-50%, -5%)
+    text-align: center
+    font-family: inter
+    color: white
+
+// For mobile screens
+@media only screen and (max-width: 1250px)
+    
+    .login-panel
+        width: 80%
+
+    .alert
+        width: 70%

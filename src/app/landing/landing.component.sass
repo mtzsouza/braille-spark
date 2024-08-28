@@ -1,0 +1,49 @@
+@import '../../styles.sass'
+
+.bg
+    position: fixed
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    background-image: url('../../assets/landing-bg.jpg')
+    background-size: cover
+    background-position: center
+    display: flex
+    justify-content: center
+    align-items: center
+
+.panel
+    width: 70%
+    height: 80%
+    background-color: rgba($aegis-blue, 0.95)
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -55%)
+    border-radius: 20px
+
+.aegis-logo
+    position: absolute
+    bottom: 3%
+    left: 2%
+    width: 10%
+
+.braille-spark-logo
+    position: absolute
+    margin-top: -3%
+    right: 0
+    width: 15%
+
+// For mobile screens
+@media only screen and (max-width: 768px)
+
+    .panel
+        background-color: white
+        width: 90%
+
+    .braille-spark-logo
+        display: none
+
+    .aegis-logo
+        width: 20vw

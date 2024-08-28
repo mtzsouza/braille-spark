@@ -1,0 +1,47 @@
+@import '../../../styles.sass'
+
+.container
+    display: flex
+    gap: 5%
+
+.settingsPanel
+    width: 30%
+    padding: 2%
+    background-color: white
+    font-family: Jockey One
+    flex-direction: column
+    align-items: center
+    text-align: center
+    
+
+    .title
+        color: black
+        margin: 0
+    
+    .inputFields
+        display: flex
+        align-items: center
+        gap: 5%
+        padding: 5px 20px
+        cursor: pointer
+
+        &:hover
+            background-color: $aegis-light-gray
+
+        img
+            width: 40px
+            height: 50px
+
+    .signout 
+        margin-top: 40px
+        padding: 10px 40px
+        background-color: black
+        color: white
+        border: none
+        font-weight: bold
+        cursor: pointer
+        transition: background-color 0.3s ease
+        justify-content: center
+        font-family: Jockey One
+        font-size: 20px
+        letter-spacing: 2px

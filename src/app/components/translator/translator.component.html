@@ -1,0 +1,33 @@
+<app-navbar>
+    @if (showOverlay) {
+        <div class="overlay">
+            <div class="file-panel">
+                <h4 class="close-panel-icon" (click)="showOverlay = false">X</h4>
+                <input type="file" (change)="onFileSelected($event)" accept=".txt">
+            </div>
+        </div>
+    }
+    <div class="container">
+        <div class="text-panels">
+            <div class="text-area">
+                <div class="text-label">
+                    Enter Text To Be Translated <span (click)="showOverlay = true">...or import from file</span>
+                </div>
+                <textarea id="latin-text" class="text-box" placeholder="Lorem ipsum dolor sit amet"></textarea>
+            </div>
+            <div class="text-area">
+                <div id="confirmation">
+                    <img src="assets/correct.png" alt="confirmation">
+                    <h1>Copied to clipboard!</h1>
+                </div>
+                <div class="text-label">
+                    Copy Translated Text <span (click)="downloadBraille()">...or export to file</span>
+                </div>
+                <textarea id="braille-text" class="text-box" (click)="copyToClipboard()" contenteditable="false" placeholder="⠇⠕⠗⠑⠍⠀⠊⠏⠎⠥⠍⠀⠙⠕⠇⠕⠗⠀⠎⠊⠞⠀⠁⠍⠑⠞"></textarea>
+            </div>
+        </div>
+        <button (click)="translate()">
+            Translate
+        </button>
+    </div>
+</app-navbar>

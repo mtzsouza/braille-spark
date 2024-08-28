@@ -1,0 +1,8 @@
+<div class="bg">
+    <div class="panel">
+        <img src="assets/braille-spark-logo-white.png" alt="braille-spark logo" class="braille-spark-logo" *ngIf="currentPage != 'register'">
+        <app-login *ngIf="currentPage == 'login'" (changeLandingPage)="changeLandingPage($event.page)"></app-login>
+        <app-register *ngIf="currentPage == 'register'" (changeLandingPage)="changeLandingPage($event.page)"></app-register>
+    </div>
+    <img src="assets/aegis-logo.png" alt="aegis logo" class="aegis-logo">
+</div>

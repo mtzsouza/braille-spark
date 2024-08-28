@@ -1,0 +1,10 @@
+<div class="change-username-panel">
+    <h2>Change Username</h2>
+    <form (submit)="onSubmit()">
+        <div class="input-box">
+            <label for="new-username">New Username</label>
+            <input type="text" name="new-username" id="new-username" [(ngModel)]="formData.newUsername" required>
+        </div>
+        <input type="submit" value="Submit" class="submit">
+    </form>
+</div>

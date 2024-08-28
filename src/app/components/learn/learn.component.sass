@@ -1,0 +1,129 @@
+@import '../../../styles.sass'
+
+.container
+    height: 80%
+    width: 100%
+    display: flex
+    
+    .modules-list
+        height: 100%
+        width: 20%
+        background: white
+        margin-right: 4%
+        border: 4px black solid
+        border-radius: 12px
+        overflow: auto
+
+        .title-area
+            width: 100%
+            height: 8%
+            text-align: center
+            border-bottom: 4px $aegis-dark-gray solid
+
+            .title
+                font-family: jockey one
+                font-size: 24px
+                color: black
+                margin-bottom: 10%
+
+        .module-selector
+            position: relative
+            width: 100%
+            height: 12%
+            border-bottom: 4px $aegis-dark-gray solid
+            display: flex
+            align-items: center
+            justify-content: center
+            font-family: inter
+            font-size: 16px
+            cursor: pointer
+            transition-duration: 200ms
+
+            &:hover
+                background-color: $aegis-blue
+                color: white
+
+            .icon-trash
+                width: 20px
+                position: absolute
+                right: 5%
+                top: 50%
+                transform: translateY(-50%)
+                cursor: pointer
+
+        .add-module-selector
+            font-size: 40px
+
+    .module
+        position: relative
+        height: 100%
+        width: 70%
+        background: white
+        border: 4px black solid
+        border-radius: 12px
+        display: flex
+        justify-content: center
+        overflow-y: auto
+
+        .quiz-button
+            position: absolute
+            right: 2%
+            top: 5%
+            width: 10%
+
+        h1
+            position: absolute
+            left: 50%
+            transform: translateX(-50%)
+            font-family: inter
+
+        .content
+            width: 80%
+            padding: 36px
+            margin-top: 20px
+            font-size: 20px
+            font-family: inter
+            line-height: 1.6
+            overflow-wrap: break-word
+
+        .characters
+            width: 100%
+            display: flex
+            justify-content: center
+            gap: 3%
+            padding-bottom: 30px
+            padding-top: 50px
+
+
+        .default-message
+            width: 50%
+            position: absolute
+            top: 50%
+            left: 50%
+            transform: translate(-50%, -50%)
+            opacity: 80%
+
+        .add-module
+            width: 70%
+            padding: 36px
+            font-size: 20px
+            font-family: inter
+
+            .input
+                display: flex
+                flex-direction: column
+                margin: 30px
+
+                .text-input
+                    padding: 8px 20px
+                    border-radius: 15px
+                    font-family: inter
+
+                .large
+                    height: auto
+                    min-height: 200px
+
+            .button
+                position: absolute
+                left: 50%
+                transform: translateX(-50%)

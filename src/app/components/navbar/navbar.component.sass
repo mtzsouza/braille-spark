@@ -1,0 +1,93 @@
+@import '../../../styles.sass'
+
+.background
+  background-color: #2F5F90
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  overflow: hidden
+  
+  .content
+    padding: 2%
+    height: 100%
+
+.navbar 
+    position: relative
+    width: 100%
+    height: 60px
+    background-color: black
+    display: flex
+    align-items: center
+    z-index: 99
+    user-select: none
+
+    .braille-spark-logo 
+        position: absolute
+        left: 2%
+        width: 10%
+        top: 50%
+        transform: translateY(-50%)
+        z-index: 99
+        cursor: pointer
+    
+    .aegis-logo
+        position: absolute
+        right: 2%
+        top: 50%
+        transform: translateY(-50%)
+        height: 50%
+  
+    .nav-links 
+        position: absolute
+        left: 50%
+        top: 0
+        padding: 0
+        margin: 0
+        transform: translateX(-50%)
+        gap: 5%
+        width: 100%
+        height: 100%
+        list-style: none
+        display: flex
+        justify-content: center
+        align-items: center
+        color:$aegis-light-gray
+
+    .nav-icons
+      width: 5px
+
+    li
+      &:last-child 
+        margin-right: 0
+      
+      img  
+        width:50%
+        height: 80%
+        &:hover 
+          transform: scale(1.2)
+          transition-duration: 200ms
+        &:not(:hover)
+            transform: scale(1)
+            transition-duration: 200ms
+        
+      a 
+        display: flex
+        justify-content: center
+        text-decoration: none
+        color: $aegis-light-gray
+        transition: color 0.3s ease
+
+// For mobile screens
+@media only screen and (max-width: 850px)
+
+    .navbar
+      .braille-spark-logo
+        display: none
+
+      .aegis-logo
+        display: none
+
+      .nav-links 
+        gap: 2%
