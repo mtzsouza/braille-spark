@@ -42,6 +42,5 @@ testem.log
 Thumbs.db
 
 # Exclude environment variables
-.env
 .vercel
 src/environments
