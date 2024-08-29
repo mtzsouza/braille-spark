@@ -43,4 +43,5 @@ Thumbs.db
 
 # Exclude environment variables
 .env
-.env.local
+.vercel
+src/environments
