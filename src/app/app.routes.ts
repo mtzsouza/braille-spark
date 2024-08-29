@@ -13,10 +13,37 @@ const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToDashboard = () => redirectLoggedInTo(['']);
 
 export const routes: Routes = [
-    { path: 'login', component: LandingComponent, ...canActivate(redirectLoggedInToDashboard)},
-    { path: '', component: DashboardComponent, ...canActivate(redirectUnauthorizedToLogin)},
-    { path: 'manage-account', component: ManageAccountComponent},
-    { path: 'translator', component: TranslatorComponent},
-    { path: 'learn', component: LearnComponent},
-    { path: 'resources', component: AdditionalResourcesComponent}
+    { 
+        path: '', 
+        component: DashboardComponent, 
+        ...canActivate(redirectUnauthorizedToLogin)
+    },
+
+    { 
+        path: 'login', 
+        component: LandingComponent, 
+        ...canActivate(redirectLoggedInToDashboard)
+    },
+    
+    { 
+        path: 'manage-account', 
+        component: ManageAccountComponent,
+        ...canActivate(redirectUnauthorizedToLogin)
+    },
+    
+    { 
+        path: 'translator', 
+        component: TranslatorComponent
+    },
+    
+    { 
+        path: 'learn', 
+        component: LearnComponent,
+        ...canActivate(redirectUnauthorizedToLogin)
+    },
+    
+    { 
+        path: 'resources', 
+        component: AdditionalResourcesComponent
+    }
 ];
