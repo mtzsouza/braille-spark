@@ -11,7 +11,7 @@
         <div class="text-panels">
             <div class="text-area">
                 <div class="text-label">
-                    Enter Text To Be Translated <span (click)="showOverlay = true">...or import from file</span>
+                    Enter Text To Be Translated <img src="assets/icon-upload.png" alt="Upload File" (click)="showOverlay = true">
                 </div>
                 <textarea id="latin-text" class="text-box" placeholder="Lorem ipsum dolor sit amet"></textarea>
             </div>
@@ -21,7 +21,7 @@
                     <h1>Copied to clipboard!</h1>
                 </div>
                 <div class="text-label">
-                    Copy Translated Text <span (click)="downloadBraille()">...or export to file</span>
+                    Copy Translated Text <img src="assets/icon-download.png" alt="Download File" (click)="downloadBraille()">
                 </div>
                 <textarea id="braille-text" class="text-box" (click)="copyToClipboard()" contenteditable="false" placeholder="⠇⠕⠗⠑⠍⠀⠊⠏⠎⠥⠍⠀⠙⠕⠇⠕⠗⠀⠎⠊⠞⠀⠁⠍⠑⠞"></textarea>
             </div>

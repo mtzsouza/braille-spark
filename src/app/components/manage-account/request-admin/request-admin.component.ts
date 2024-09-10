@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { Router} from '@angular/router';
+import { AuthService } from '../../../auth/auth.service';
+import { FirestoreService } from '../../../database/firestore.service';
 
 @Component({
   selector: 'app-request-admin',
@@ -11,24 +11,20 @@ import { Router} from '@angular/router';
   styleUrl: './request-admin.component.sass'
 })
 export class RequestAdminComponent {
-    // Submit form
-    formData = {
-      "requestCode": "",
-    }
+  auth = inject(AuthService);
+  database = inject(FirestoreService);
 
-    // User ID
-    userID = localStorage.getItem('id');
+  formData = {
+    "requestCode": "",
+  }
 
-  constructor(private http: HttpClient, private router: Router) {}
-  endpoint = 'https://braille-spark-server.onrender.com/aegis-backend/' + this.userID + '/requestadmin'
   onSubmit() {
-    this.http.put(this.endpoint, this.formData)
-      .subscribe((response) => {
-        alert("Privilege Granted")
-        window.location.href = "dashboard"
-      }, (error) => {
-        console.log(error.Message)
-        alert("Failed to request admin privilege")
-      });
+    if (this.formData.requestCode == "please") {
+      const id = this.auth.getEmail()!;
+      this.database.updateField("users", id, "admin", true);
+      alert("You are now an admin.")
+    } else {
+      alert("Failed to grant admin privilege.");
+    }
   }
 }

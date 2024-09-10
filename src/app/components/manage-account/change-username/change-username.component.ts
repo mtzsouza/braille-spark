@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { Router} from '@angular/router';
+import { AuthService } from '../../../auth/auth.service';
 
 @Component({
   selector: 'app-change-username',
@@ -11,24 +10,14 @@ import { Router} from '@angular/router';
   styleUrl: './change-username.component.sass'
 })
 export class ChangeUsernameComponent {
-  // Submit form
+  auth = inject(AuthService);
+
   formData = {
     "newUsername": ""
   }
 
-  // User ID
-  userID = localStorage.getItem('id');
-
-  constructor(private http: HttpClient, private router: Router) {}
-  endpoint = 'https://braille-spark-server.onrender.com/aegis-backend/' + this.userID + '/manage-account/editUsername'
   onSubmit() {
-    this.http.put(this.endpoint, this.formData)
-      .subscribe((response) => {
-        window.location.href = "dashboard"
-        alert("Username Changed")
-      }, (error) => {
-        console.log(error.Message)
-        alert("Failed to change username")
-      });
+    this.auth.updateUsername(this.formData.newUsername);
+    alert("Username successfully changed.");
   }
 }

@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { FirestoreService } from '../../database/firestore.service';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,6 +10,12 @@ import { RouterModule } from '@angular/router';
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.sass'
 })
-export class DashboardComponent {
+export class DashboardComponent {  
+  database = inject(FirestoreService);
+  auth = inject(AuthService);
+
+  ngOnInit() {
+    
+  }
 
 }
