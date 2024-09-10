@@ -23,7 +23,7 @@ export class ManageAccountComponent {
   router = inject(Router);
   authService = inject(AuthService);
 
-  currentPanel = "change-username"
+  currentPanel = ""
 
   changePanel(panel: string) {
     this.currentPanel = panel

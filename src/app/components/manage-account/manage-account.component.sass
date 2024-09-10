@@ -1,6 +1,7 @@
 @import '../../../styles.sass'
 
 .container
+    display: relative
     display: flex
     gap: 5%
 
@@ -12,7 +13,6 @@
     flex-direction: column
     align-items: center
     text-align: center
-    
 
     .title
         color: black
@@ -45,3 +45,30 @@
         font-family: Jockey One
         font-size: 20px
         letter-spacing: 2px
+
+// For mobile screens
+@media only screen and (max-width: 850px)
+
+    .container
+        flex-direction: column
+
+        .settingsPanel
+            width: 90vw
+            height: 40vh
+            margin: auto
+
+            .title
+                font-size: small
+
+            .inputFields
+                height: 10% 
+                padding: 2px 10px
+
+                img
+                    width: 28px
+                    height: 35px
+
+            .signout
+                margin-top: 20px
+                padding: 5px 20px
+                font-size: medium
