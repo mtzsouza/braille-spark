@@ -6,7 +6,7 @@ import { NavbarComponent } from '../navbar/navbar.component';
 import { ChangeUsernameComponent } from './change-username/change-username.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { RequestAdminComponent } from './request-admin/request-admin.component';
-import { AuthService } from '../../auth/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 
 

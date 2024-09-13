@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { FirestoreService } from '../../database/firestore.service';
-import { AuthService } from '../../auth/auth.service';
+import { FirestoreService } from '../../../services/firestore.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-dashboard',

@@ -2,8 +2,8 @@ import { Routes } from '@angular/router';
 import { AngularFireAuthGuard, redirectUnauthorizedTo, redirectLoggedInTo, canActivate } from '@angular/fire/compat/auth-guard';
 
 // Components
-import { LandingComponent } from './landing/landing.component';
-import { DashboardComponent } from './landing/dashboard/dashboard.component';
+import { LandingComponent } from './components/landing/landing.component';
+import { DashboardComponent } from './components/landing/dashboard/dashboard.component';
 import { ManageAccountComponent } from './components/manage-account/manage-account.component';
 import { TranslatorComponent } from './components/translator/translator.component';
 import { LearnComponent } from './components/learn/learn.component';

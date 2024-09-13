@@ -1,7 +1,7 @@
 import { Injectable, inject, signal } from "@angular/core";
 import { Observable, from } from "rxjs";;
 import { UserInterface } from "./user.interface";
-import { FirestoreService } from "../database/firestore.service";
+import { FirestoreService } from "./firestore.service";
 import { 
     Auth,
     User,

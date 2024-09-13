@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from '../../../auth/auth.service';
-import { FirestoreService } from '../../../database/firestore.service';
+import { AuthService } from '../../../services/auth.service';
+import { FirestoreService } from '../../../services/firestore.service';
 
 @Component({
   selector: 'app-request-admin',

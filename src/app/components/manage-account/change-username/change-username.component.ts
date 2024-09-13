@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from '../../../auth/auth.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-change-username',

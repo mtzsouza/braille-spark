@@ -2,40 +2,39 @@ import { Component, EventEmitter, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AuthService } from '../../auth/auth.service';
+import { Router} from '@angular/router';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
-  selector: 'app-register',
+  selector: 'app-login',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.sass'
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.sass'
 })
-export class RegisterComponent {
+export class LoginComponent {
   // Injections
   http = inject(HttpClient);
   router = inject(Router);
   authService = inject(AuthService);
 
-  // Switch to login panel
+  // Switch to register panel
   @Output('changeLandingPage')
   changeLandingPage: EventEmitter<{ page: string }> = new EventEmitter();
-  closeRegisterPage() {
-    this.changeLandingPage.emit({page: 'login'});
+  openRegisterPage() {
+    this.changeLandingPage.emit({page: 'register'});
   }
 
   // Initialize data
   errorMessage: string | null = null;
   formData = {
     "email": "",
-    "username": "",
     "password": ""
   }
 
-  // Register
+  // Log in
   onSubmit() {
-    this.authService.register(this.formData.email, this.formData.username, this.formData.password)
+    this.authService.login(this.formData.email, this.formData.password)
     .subscribe({
       next: () => {
       this.router.navigateByUrl('/');
