@@ -1,7 +1,7 @@
 export function translateToBraille(text: string): string {
     const brailleDict: { [key: string]: string } = {
         // Numbers
-        'number-indicator': '⠼', // This character goes before a group of numbers
+        'number-indicator': '⠼',
         '1': '⠁',
         '2': '⠃',
         '3': '⠉',
@@ -115,20 +115,20 @@ export function translateToBraille(text: string): string {
     let brailleText = '';
     let ptr: number = 0;
     while (ptr < text.length) {
-        // If current char is whitespace, add blank char
+        // Check if current char is whitespace
         const whitespaceChars = ' \u00A0\u2002\u2003\u2009\u200B\u2029\u000A\u000D\u0085';
         if (whitespaceChars.includes(text[ptr])) {
-
-            // If char is newline, add newline instead of blank
+            // If whitespace is newline, add newline
             if (text[ptr] == '\n') {
                 brailleText += '\n'
                 ptr += 1;
                 continue;
-            }
-
-            brailleText += brailleDict[' '];
-            ptr += 1;
-            continue;
+            } else {
+                // If whitespace is not a newline, add a space
+                brailleText += brailleDict[' '];
+                ptr += 1;
+                continue;
+            } 
         }
 
         // If current char is a number, add number indicator

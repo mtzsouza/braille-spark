@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { translateToBraille } from '../../translator/brailleConverter';
+import { translateToBraille } from '../../../utils/brailleConverter';
 
 @Component({
   selector: 'app-character-card',

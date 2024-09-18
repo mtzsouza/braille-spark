@@ -1,6 +1,6 @@
 import { Injectable, inject, signal } from "@angular/core";
 import { Observable, from } from "rxjs";;
-import { UserInterface } from "./user.interface";
+import { UserInterface } from "../utils/user.interface";
 import { FirestoreService } from "./firestore.service";
 import { 
     Auth,
@@ -23,11 +23,7 @@ export class AuthService {
     user$ = user(this.firebaseAuth);
     currentUserSig = signal<UserInterface | null | undefined>(undefined)
 
-    register(
-        email: string, 
-        username: string, 
-        password: string
-        ) : Observable<void> {
+    register(email: string, username: string, password: string) : Observable<void> {
         const promise = createUserWithEmailAndPassword(
             // Register to Firebase Auth
             this.firebaseAuth, 
@@ -40,20 +36,13 @@ export class AuthService {
                 admin: false,
                 level: 1
             };
-            this.database.addDataWithCustomId("users", userData, email);
+            this.database.addDocWithCustomId("users", userData, email);
 
             return from(promise);
     }
 
-    login(
-        email: string,
-        password: string
-    ) : Observable<void> {
-        const promise = signInWithEmailAndPassword(
-            this.firebaseAuth,
-            email,
-            password
-        ).then(() => {});
+    login(email: string, password: string) : Observable<void> {
+        const promise = signInWithEmailAndPassword(this.firebaseAuth,email,password).then(() => {});
 
         return from(promise);
     }
@@ -70,6 +59,20 @@ export class AuthService {
 
     getEmail(): string | null | undefined {
         return this.firebaseAuth.currentUser?.email;
+    }
+
+    async isAdmin(): Promise<boolean> {
+        const email = this.getEmail();
+        if (typeof email === 'string') {
+            try {
+                const doc = await this.database.fetchDocumentById('users', email);
+                return doc.admin;
+            } catch (error) {
+                console.error('Error fetching document:', error);
+                return false;
+            }
+        }
+        return false;
     }
 
     resetPassword(email: string): Observable<void> {

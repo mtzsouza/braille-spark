@@ -4,11 +4,11 @@
             <div class="title-area">
                 <h1 class="title">Course Content</h1>
             </div>
-            @for (item of modules; track item) {
-                <div class="module-selector" (click)="addModulePanel = false; moduleSelected = item.id">
-                    <p>{{ item.moduleName }}</p> 
+            @for (module of modules; track module) {
+                <div class="module-selector" (click)="addModulePanel = false; moduleSelected = module">
+                    <p>{{ module.name }}</p> 
                     @if (isAdmin) {
-                        <img src="assets/icon-trash.png" alt="Delete Module" class="icon-trash" (click)="deleteModule(moduleSelected)">
+                        <img src="assets/icon-trash.png" alt="Delete Module" class="icon-trash" (click)="this.moduleService.deleteModule(moduleSelected.id)">
                     }
                 </div>
             }
@@ -22,14 +22,14 @@
             @if (!addModulePanel) {
                 @if (moduleSelected) {
                     <button class="quiz-button button-small">Quiz</button>
-                    <h1>{{ getName(this.moduleSelected) }}</h1>
+                    <h1>{{ moduleSelected.name }}</h1>
                     <div class="content">
                         <div class="characters">
-                            @for (item of getCharacters(moduleSelected); track item) {
+                            @for (item of moduleSelected.characters; track item) {
                                 <app-character-card [character]="item"></app-character-card>
                             }
                         </div>
-                        <p>{{ getContent(this.moduleSelected) }}</p>
+                        <p>{{ moduleSelected.content }}</p>
                     </div>
                 } @else {
                     <img src="assets/braille-spark-logo-black.png" alt="Braille-Spark Logo" class="default-message">
@@ -37,20 +37,20 @@
             } @else {
                 <h1>Add Module</h1>
                 <div class="add-module">
-                    <form (submit)="addModule()">
+                    <form (submit)="this.moduleService.addModule(moduleData);">
                         <div class="input">
                             <label for="name">Name</label>
-                            <input type="text" id="name" name="name" class="text-input" [(ngModel)]="formData.name" required>
+                            <input type="text" id="name" name="name" class="text-input" [(ngModel)]="moduleData.name" required>
                         </div>
                         <div class="input">
                             <label for="content">Content</label>
-                            <textarea type="text" id="content" name="content" class="text-input large" [(ngModel)]="formData.content" required></textarea>
+                            <textarea type="text" id="content" name="content" class="text-input large" [(ngModel)]="moduleData.content" required></textarea>
                         </div>
                         <div class="input">
                             <label for="character">Characters taught (max: 10)</label>
-                            <input type="text" id="character" name="character" maxlength="10" class="text-input" [(ngModel)]="formData.character" required>
+                            <input type="text" id="character" name="character" maxlength="10" class="text-input" [(ngModel)]="moduleData.characters" required>
                         </div>
-                        <input type="submit" value="Add Module" class="button" >
+                        <input type="submit" value="Add Module" class="button">
                     </form>
                 </div>
             }

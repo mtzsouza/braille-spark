@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { 
   Firestore, 
   collection, 
@@ -7,32 +7,35 @@ import {
   doc, 
   getDoc, 
   setDoc, 
-  updateDoc 
+  updateDoc,
+  deleteDoc
 } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirestoreService {
-  constructor(private firestore: Firestore) {} // Inject Firestore via constructor
+  constructor(private firestore: Firestore) {} // Changing this to inject() will crash
 
  //   USAGE: 
- //   const data = this.database.fetchDocumentById('users', 'id').then(data => {})
+ //   const data = this.database.fetchDocumentById('users', 'id').then(data => {console.log(data);})
 
-  async addData(collectionName: string, data: any): Promise<void> {
+  async addDocument(collectionName: string, data: any): Promise<string> {
     const ref = collection(this.firestore, collectionName);
     try {
-      await addDoc(ref, data);
+      const docRef = await addDoc(ref, data);
       console.log('Data added successfully');
+      return docRef.id;
     } catch (error) {
       console.error('Error adding data: ', error);
     }
+    return ''
   }
 
-  async addDataWithCustomId(collectionName: string, data: any, customId: string): Promise<void> {
-    const ref = doc(this.firestore, collectionName, customId);
+  async addDocWithCustomId(collectionName: string, data: any, customId: string): Promise<void> {
+    const docRef = doc(this.firestore, collectionName, customId);
     try {
-      await setDoc(ref, data);
+      await setDoc(docRef, data);
       console.log('Data added successfully with custom ID');
     } catch (error) {
       console.error('Error adding data with custom ID: ', error);
@@ -40,9 +43,9 @@ export class FirestoreService {
   }
 
   async updateField(collectionName: string, docId: string, field: string, value: any): Promise<void> {
-    const ref = doc(this.firestore, collectionName, docId);
+    const docRef = doc(this.firestore, collectionName, docId);
     try {
-      await updateDoc(ref, { [field]: value });
+      await updateDoc(docRef, { [field]: value });
       console.log('Field updated successfully');
     } catch (error) {
       console.error('Error updating field: ', docId, error);
@@ -78,6 +81,21 @@ export class FirestoreService {
     } catch (error) {
       console.error('Error fetching document: ', error);
       return null;
+    }
+  }
+
+  async deleteDocument(collectionName: string, documentId: string): Promise<void> {
+    const docRef = doc(this.firestore, `${collectionName}/${documentId}`);
+    try {
+      const docSnapshot = await getDoc(docRef);
+      if (docSnapshot.exists()) {
+        deleteDoc(docRef);
+        console.log("Document deleted successfully")
+      } else {
+        console.log('No such document!');
+      }
+    } catch (error) {
+      console.error('Error deleting document: ', error);
     }
   }
 }
