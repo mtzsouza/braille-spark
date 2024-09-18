@@ -115,9 +115,17 @@ export function translateToBraille(text: string): string {
     let brailleText = '';
     let ptr: number = 0;
     while (ptr < text.length) {
-        // If current char is whitespace, add blank character
+        // If current char is whitespace, add blank char
         const whitespaceChars = ' \u00A0\u2002\u2003\u2009\u200B\u2029\u000A\u000D\u0085';
         if (whitespaceChars.includes(text[ptr])) {
+
+            // If char is newline, add newline instead of blank
+            if (text[ptr] == '\n') {
+                brailleText += '\n'
+                ptr += 1;
+                continue;
+            }
+
             brailleText += brailleDict[' '];
             ptr += 1;
             continue;
