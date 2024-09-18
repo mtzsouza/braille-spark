@@ -7,7 +7,6 @@ import { DashboardComponent } from './components/landing/dashboard/dashboard.com
 import { ManageAccountComponent } from './components/manage-account/manage-account.component';
 import { TranslatorComponent } from './components/translator/translator.component';
 import { LearnComponent } from './components/learn/learn.component';
-import { AdditionalResourcesComponent } from './components/additional-resources/additional-resources.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToDashboard = () => redirectLoggedInTo(['']);
@@ -32,7 +31,7 @@ export const routes: Routes = [
     },
     
     { 
-        path: 'translator', 
+        path: 'transcribe', 
         component: TranslatorComponent
     },
     
@@ -41,9 +40,4 @@ export const routes: Routes = [
         component: LearnComponent,
         ...canActivate(redirectUnauthorizedToLogin)
     },
-    
-    { 
-        path: 'resources', 
-        component: AdditionalResourcesComponent
-    }
 ];
