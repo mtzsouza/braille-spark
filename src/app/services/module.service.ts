@@ -27,7 +27,7 @@ export class ModuleService {
     addModule(module: ModuleInterface): void {
         this.getModules().then(data => {
             // Runs if there's at least one existent module
-            const id = (Number(data[data.length - 1].id) + 1).toString();
+            const id = (Number(data[data.length - 1].id) + 1).toString(); // Grab id of last module and increment by 1
             this.database.addDocWithCustomId('modules', module, id).then(() => {
                 this.database.updateField('modules', id, "id", id);
                 alert("Module added successfully.")

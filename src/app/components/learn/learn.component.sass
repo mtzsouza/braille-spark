@@ -18,7 +18,7 @@
             width: 100%
             height: 8%
             text-align: center
-            border-bottom: 4px $aegis-dark-gray solid
+            border-bottom: 4px $aegis-light-gray solid
 
             .title
                 font-family: jockey one
@@ -30,7 +30,7 @@
             position: relative
             width: 100%
             height: 12%
-            border-bottom: 4px $aegis-dark-gray solid
+            border-bottom: 4px $aegis-light-gray solid
             display: flex
             align-items: center
             justify-content: center
@@ -64,6 +64,7 @@
         display: flex
         justify-content: center
         overflow-y: auto
+        overflow-x: hidden
 
         h1
             position: absolute
@@ -81,9 +82,10 @@
             overflow-wrap: break-word
 
             .characters
-                width: 100%
+                width: 103%
                 display: flex
-                justify-content: center
+                justify-content: start
+                overflow-x: scroll
                 gap: 3%
                 padding-bottom: 30px
                 padding-top: 50px
@@ -144,3 +146,57 @@
                 position: absolute
                 left: 50%
                 transform: translateX(-50%)
+
+// For mobile screens
+@media only screen and (max-width: 850px)
+    .container
+        height: 89%
+        flex-direction: column
+        gap: 1%
+
+        .modules-list
+            width: 98%
+            height: 16%
+            display: flex
+            flex-direction: row
+            align-items: center
+
+            .title-area
+                min-width: 30%
+                height: 100%
+                border: none
+                place-content: center
+                border-right: 4px $aegis-light-gray solid
+
+                .title
+                    font-size: medium
+                    margin: 0
+
+            .module-selector
+                min-width: 30%
+                height: 100%
+                border: none
+                border-right: 4px $aegis-light-gray solid
+
+        .module
+            width: 98%
+
+            h1
+                text-align: center
+                font-size: 24px
+                margin-top: 32px
+
+            .content
+                width: 85%
+                padding: 18px
+
+                p
+                    font-size: 16px
+
+            .add-module
+                width: 100%
+                padding: 20px
+                margin-top: 32px
+
+                form
+                    padding-bottom: 48px
