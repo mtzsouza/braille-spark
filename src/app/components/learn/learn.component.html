@@ -5,7 +5,7 @@
                 <h1 class="title">Course Content</h1>
             </div>
             @for (module of modules; track module) {
-                <div class="module-selector" (click)="addModulePanel = false; moduleSelected = module">
+                <div class="module-selector" (click)="showAddModule = false; currentPage = 0; moduleSelected = module">
                     <p>{{ module.name }}</p> 
                     @if (isAdmin) {
                         <img src="assets/icon-trash.png" alt="Delete Module" class="icon-trash" (click)="this.moduleService.deleteModule(moduleSelected.id)">
@@ -13,23 +13,33 @@
                 </div>
             }
             @if (isAdmin) {
-                <div class="add-module-selector module-selector" (click)="addModulePanel = true">
+                <div class="add-module-selector module-selector" (click)="newModuleContent = [{text: ''}]; showAddModule = true">
                     <p>+</p>
                 </div>
             }
         </div>
         <div class="module">
-            @if (!addModulePanel) {
+            @if (!showAddModule) {
                 @if (moduleSelected) {
-                    <button class="quiz-button button-small">Quiz</button>
                     <h1>{{ moduleSelected.name }}</h1>
                     <div class="content">
                         <div class="characters">
                             @for (item of moduleSelected.characters; track item) {
-                                <app-character-card [character]="item"></app-character-card>
+                            <app-character-card [character]="item"></app-character-card>
                             }
                         </div>
-                        <p>{{ moduleSelected.content }}</p>
+                        <p>{{ moduleSelected.content[currentPage].text }}</p>
+                        <div class="page-controller">
+                            @if (currentPage > 0) {
+                            <img src="../../../assets/icon-previous.png" alt="Previous Page" (click)="currentPage = currentPage - 1">
+                            }
+                            @if (currentPage < (moduleSelected.content.length - 1)) {
+                            <img src="../../../assets/icon-next.png" alt="Next Page" (click)="currentPage = currentPage + 1">
+                            }
+                            @if (currentPage == (moduleSelected.content.length - 1)) {
+                                <img src="../../../assets/icon-yes.png" alt="Start Quiz">
+                            }
+                        </div>
                     </div>
                 } @else {
                     <img src="assets/braille-spark-logo-black.png" alt="Braille-Spark Logo" class="default-message">
@@ -37,14 +47,22 @@
             } @else {
                 <h1>Add Module</h1>
                 <div class="add-module">
-                    <form (submit)="this.moduleService.addModule(moduleData);">
+                    <form (submit)="moduleData.content = newModuleContent; this.moduleService.addModule(moduleData);">
                         <div class="input">
                             <label for="name">Name</label>
                             <input type="text" id="name" name="name" class="text-input" [(ngModel)]="moduleData.name" required>
                         </div>
-                        <div class="input">
-                            <label for="content">Content</label>
-                            <textarea type="text" id="content" name="content" class="text-input large" [(ngModel)]="moduleData.content" required></textarea>
+                        @for (item of newModuleContent; track item) {
+                            <div class="input">
+                                <label for="content">Content</label>
+                                <textarea type="text" id="content" name="content" class="text-input large" [(ngModel)]="item.text" required></textarea>
+                            </div>
+                        }
+                        <div class="content-controller">
+                            @if (newModuleContent.length > 1) {
+                            <img src="../../../assets/icon-remove.png" (click)="newModuleContent.pop()">
+                            }
+                            <img src="../../../assets/icon-add.png" (click)="newModuleContent.push({text: ''})">
                         </div>
                         <div class="input">
                             <label for="character">Characters taught (max: 10)</label>

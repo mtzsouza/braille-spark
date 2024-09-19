@@ -8,6 +8,12 @@ import { ModuleInterface } from "../utils/module.interface";
 export class ModuleService {
     database = inject(FirestoreService);
 
+    reload() {
+        setTimeout(() => {
+            location.reload();
+        }, 1000);
+    }
+
     async getModules(): Promise<any[]> {
         try {
             const collection = await this.database.fetchCollection('modules')
@@ -19,15 +25,26 @@ export class ModuleService {
     }
 
     addModule(module: ModuleInterface): void {
-        const moduleId = this.database.addDocument('modules', module).then(moduleId => {
-            console.log("Module ID:", moduleId)
-            this.database.updateField('modules', moduleId, "id", moduleId);
-            alert("Module added successfully.")
-            location.reload();
-        })
-        .catch(error => {
-            console.error("Failed to add module:", error);
-        })
+        this.getModules().then(data => {
+            // Runs if there's at least one existent module
+            const id = (Number(data[data.length - 1].id) + 1).toString();
+            this.database.addDocWithCustomId('modules', module, id).then(() => {
+                this.database.updateField('modules', id, "id", id);
+                alert("Module added successfully.")
+                this.reload();
+            })
+        }).catch(error => {
+            // Runs if this is the first module
+            const id = '1';
+            this.database.addDocWithCustomId('modules', module, id).then(() => {
+                this.database.updateField('modules', id, "id", id);
+                alert("Module added successfully.")
+                this.reload();
+            })
+            .catch(error => {
+                console.error("Failed to add module:", error);
+            })
+        });
     }
 
     deleteModule(moduleId: string): void {
@@ -35,6 +52,7 @@ export class ModuleService {
             if (confirm("Are you sure you want to delete this module?")) {
                 this.database.deleteDocument('modules', moduleId);
                 alert("Module deleted successfully.");
+                this.reload();
             }
         } catch (error) {
             console.error('Error deleting module:', error);

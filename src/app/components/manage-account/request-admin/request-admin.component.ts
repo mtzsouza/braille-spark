@@ -19,12 +19,22 @@ export class RequestAdminComponent {
   }
 
   onSubmit() {
-    if (this.formData.requestCode == "please") {
-      const id = this.auth.getEmail()!;
-      this.database.updateField("users", id, "admin", true);
-      alert("You are now an admin.")
-    } else {
-      alert("Failed to grant admin privilege.");
-    }
+    this.database.fetchDocumentById("settings", "administration")
+    .then(data => {
+      if (data.codes.includes(this.formData.requestCode)) {
+        const email = this.auth.getEmail()!;
+        let adminsList = data.admins;
+        adminsList.push(email);
+        console.log(adminsList);
+        this.database.updateField("users", email, "admin", true);
+        this.database.updateField("settings", "administration", "admins", adminsList)
+        alert("You are now an admin.")
+      } else {
+        alert("Failed to grant admin privilege.");
+      }
+    })
+    .catch(error => {
+      console.error("Error validating request code:", error)
+    });
   }
 }

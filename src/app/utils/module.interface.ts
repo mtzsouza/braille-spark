@@ -1,6 +1,6 @@
 export interface ModuleInterface {
     name: string;
-    content: string;
+    content: object[];
     characters: string;
     creator: string;
     id: string;

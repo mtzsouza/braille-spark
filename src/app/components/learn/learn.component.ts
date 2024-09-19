@@ -1,8 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { CharacterCardComponent } from './character-card/character-card.component';
 import { AuthService } from '../../services/auth.service';
@@ -20,13 +18,12 @@ export class LearnComponent {
   authService = inject(AuthService);
   moduleService = inject(ModuleService);
 
-  modules: any;
+  modules: any; 
   moduleSelected: any;
-  addModulePanel = false;
+  currentPage = 0;
+  showAddModule = false;
   isAdmin = false;
-
-  // Receiving admin status and modules when opening the page
-  userID = localStorage.getItem('id');
+  newModuleContent = [{text: ''}];
 
   ngOnInit() {
     // Check Admin status
@@ -46,12 +43,11 @@ export class LearnComponent {
         .catch(error => {
           console.error('Error loading modules:', error);
         });
-
   }
 
   moduleData: ModuleInterface = {
     "name": "",
-    "content": "",
+    "content": this.newModuleContent,
     "characters": "",
     "creator": this.authService.getEmail()!,
     "id": ""
