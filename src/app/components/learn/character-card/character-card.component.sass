@@ -9,6 +9,13 @@
     border: 2px black solid
     border-radius: 8px
     background-color: $aegis-light-gray
+    user-select: none
+    &:hover 
+        transform: scale(1.1)
+        transition-duration: 200ms
+    &:not(:hover)
+        transform: scale(1)
+        transition-duration: 200ms
 
     .braille
         font-size: 32px

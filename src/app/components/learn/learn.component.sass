@@ -89,6 +89,7 @@
                 gap: 3%
                 padding-bottom: 30px
                 padding-top: 50px
+                padding-left: 25px
 
             p
                 padding-bottom: 30px
@@ -103,6 +104,12 @@
 
                 img
                     cursor: pointer
+                    &:hover 
+                        transform: scale(1.075)
+                        transition-duration: 200ms
+                    &:not(:hover)
+                        transform: scale(1)
+                        transition-duration: 200ms
 
 
         .default-message
@@ -178,6 +185,10 @@
                 border: none
                 border-right: 4px $aegis-light-gray solid
 
+                p
+                    text-align: center
+                    font-size: 14px
+
         .module
             width: 98%
 
@@ -192,6 +203,10 @@
 
                 p
                     font-size: 16px
+
+                .characters
+                    padding-top: 75px
+                    padding-left: 10px
 
             .add-module
                 width: 100%
