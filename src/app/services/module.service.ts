@@ -19,8 +19,18 @@ export class ModuleService {
             const collection = await this.database.fetchCollection('modules')
             return collection;
         } catch (error) {
-            console.error('Error fetching collection:', error);
+            console.error('Error fetching modules:', error);
             return [];
+        }
+    }
+
+    async getModuleById(id: string): Promise<ModuleInterface | null> {
+        try {
+            const module: ModuleInterface = await this.database.fetchDocumentById('modules', id)
+            return module;
+        } catch (error) {
+            console.error('Error fetching module:', error);
+            return null;
         }
     }
 

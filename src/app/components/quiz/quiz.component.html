@@ -1,0 +1,22 @@
+<div class="container">
+    <form class="quiz-area" [formGroup]="quizForm" (ngSubmit)="onSubmit()">
+      <h1 class="title">Quiz</h1>
+  
+      <div *ngFor="let question of quiz.questions; let qIndex = index" class="question">
+        <p>{{ question.description }}</p>
+        
+        <div class="options">
+            <div class="option" *ngFor="let option of question.options; let oIndex = index">
+                <input type="radio" [id]="'question' + qIndex + 'option' + oIndex" [formControlName]="'question' + qIndex" [value]="option.answer"/>
+                <label [for]="'question' + qIndex + 'option' + oIndex">
+                  <app-quiz-card [character]="option.answer"></app-quiz-card>
+                </label>
+            </div>
+        </div>
+      </div>
+  
+      <!-- Submit button -->
+      <button type="submit" class="button">Submit Quiz</button>
+    </form>
+  </div>
+  

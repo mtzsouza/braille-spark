@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
-import { translateToBraille } from '../../utils/brailleConverter';
+import { translateToBraille } from '../../utils/BrailleTranslator';
 
 @Component({
   selector: 'app-translator',

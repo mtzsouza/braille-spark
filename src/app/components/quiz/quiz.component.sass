@@ -1,0 +1,61 @@
+@import '../../../styles.sass'
+    
+.container
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    min-height: 100%
+    background-color: $aegis-blue
+    display: flex
+    justify-content: center
+
+    .quiz-area
+        width: 80%
+        height: fit-content
+        margin: 24px
+        padding: 12px 60px
+        background-color: $aegis-light-gray
+        border: 4px black solid
+        border-radius: 12px
+        display: flex
+        flex-direction: column
+        justify-items: center
+
+        .title
+            text-align: center
+            color: black
+            font-size: 40px
+
+        .question
+            font-family: Inter
+            font-size: 20px
+            margin-bottom: 60px
+
+            .options
+                display: flex
+                gap: 64px
+
+                .option
+                    display: flex
+
+        button
+            margin-bottom: 24px
+            padding: 12px
+
+// For mobile screens
+@media only screen and (max-width: 850px)
+    .container
+        .quiz-area
+            padding: 12px 24px
+
+            .title
+                font-size: 24px
+
+            .question
+                font-size: 16px
+                margin-bottom: 24px
+
+                .options
+                    flex-direction: column
+                    gap: 2px

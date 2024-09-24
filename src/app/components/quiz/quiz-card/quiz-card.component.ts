@@ -2,13 +2,13 @@ import { Component, Input } from '@angular/core';
 import { translateToBraille } from '../../../utils/BrailleTranslator';
 
 @Component({
-  selector: 'app-character-card',
+  selector: 'app-quiz-card',
   standalone: true,
   imports: [],
-  templateUrl: './character-card.component.html',
-  styleUrl: './character-card.component.sass'
+  templateUrl: './quiz-card.component.html',
+  styleUrl: './quiz-card.component.sass'
 })
-export class CharacterCardComponent {
+export class QuizCardComponent {
   @Input() character: string = "";
 
   translate(s: string) {

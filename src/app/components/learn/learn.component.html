@@ -5,7 +5,7 @@
                 <h1 class="title">Modules</h1>
             </div>
             @for (module of modules; track module) {
-                <div class="module-selector" (click)="showAddModule = false; currentPage = 0; moduleSelected = module">
+                <div class="module-selector" [ngClass]="{'locked': (userLevel < module.id)}" (click)="showAddModule = false; currentPage = 0; moduleSelected = module">
                     <p>{{ module.name }}</p> 
                     @if (isAdmin) {
                         <img src="assets/icon-trash.png" alt="Delete Module" class="icon-trash" (click)="this.moduleService.deleteModule(moduleSelected.id)">
@@ -37,7 +37,7 @@
                             <img src="../../../assets/icon-next.png" alt="Next Page" (click)="currentPage = currentPage + 1">
                             }
                             @if (currentPage == (moduleSelected.content.length - 1)) {
-                                <img src="../../../assets/icon-yes.png" alt="Start Quiz">
+                                <img src="../../../assets/icon-yes.png" alt="Start Quiz" (click)="startQuiz()">
                             }
                         </div>
                     </div>

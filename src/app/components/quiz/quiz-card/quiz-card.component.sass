@@ -1,0 +1,28 @@
+@import '../../../../styles.sass'
+
+.card
+    display: flex
+    flex-direction: column
+    align-items: center
+    border: 2px black solid
+    border-radius: 8px
+    background-color: $aegis-light-blue
+    color: black
+    user-select: none
+    cursor: pointer
+    &:hover 
+        transform: scale(1.1)
+        transition-duration: 200ms
+    &:not(:hover)
+        transform: scale(1)
+        transition-duration: 200ms
+
+    .braille
+        font-size: 32px
+
+// For mobile screens
+@media only screen and (max-width: 850px)
+    .card
+
+        .braille
+            font-size: 24px

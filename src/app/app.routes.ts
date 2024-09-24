@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
-import { AngularFireAuthGuard, redirectUnauthorizedTo, redirectLoggedInTo, canActivate } from '@angular/fire/compat/auth-guard';
+import { redirectUnauthorizedTo, redirectLoggedInTo, canActivate } from '@angular/fire/compat/auth-guard';
+import { QuizGuard } from './guards/Quiz.guard';
 
 // Components
 import { LandingComponent } from './components/landing/landing.component';
@@ -7,6 +8,7 @@ import { DashboardComponent } from './components/landing/dashboard/dashboard.com
 import { ManageAccountComponent } from './components/manage-account/manage-account.component';
 import { TranslatorComponent } from './components/translator/translator.component';
 import { LearnComponent } from './components/learn/learn.component';
+import { QuizComponent } from './components/quiz/quiz.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToDashboard = () => redirectLoggedInTo(['']);
@@ -39,5 +41,10 @@ export const routes: Routes = [
         path: 'learn', 
         component: LearnComponent,
         ...canActivate(redirectUnauthorizedToLogin)
+    },
+    { 
+        path: 'quiz/:id', 
+        component: QuizComponent,
+        canActivate: [redirectUnauthorizedToLogin, QuizGuard]
     },
 ];

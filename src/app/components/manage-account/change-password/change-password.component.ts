@@ -22,8 +22,10 @@ export class ChangePasswordComponent {
 
     onSubmit() {
       this.auth.resetPassword(this.auth.getEmail()!);
-      alert("Password reset email sent. You'll be logged out now.");
-      this.auth.logout();
-      this.router.navigateByUrl("/login");
+      if (confirm("Are you sure you wish to reset your password?")) {
+        alert("Password reset email sent. You'll be logged out now.");
+        this.auth.logout();
+        this.router.navigateByUrl("/login");
+      }
     }
 }

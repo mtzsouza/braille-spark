@@ -6,6 +6,8 @@ import { CharacterCardComponent } from './character-card/character-card.componen
 import { AuthService } from '../../services/auth.service';
 import { ModuleService } from '../../services/module.service';
 import { ModuleInterface } from '../../utils/module.interface';
+import { Router } from '@angular/router';
+import { response } from 'express';
 
 @Component({
   selector: 'app-learn',
@@ -17,12 +19,14 @@ import { ModuleInterface } from '../../utils/module.interface';
 export class LearnComponent {
   authService = inject(AuthService);
   moduleService = inject(ModuleService);
+  router = inject(Router)
 
   modules: any; 
   moduleSelected: any;
   currentPage = 0;
   showAddModule = false;
   isAdmin = false;
+  userLevel = 0;
   newModuleContent = [{text: ''}];
 
   ngOnInit() {
@@ -34,6 +38,15 @@ export class LearnComponent {
         .catch(error => {
             console.error('Error checking admin status:', error);
         });
+
+    // Check user level
+    this.authService.getLevel()
+    .then(response => {
+      this.userLevel = response;
+    })
+    .catch(error => {
+      console.error('Error checking user level:', error);
+    })
 
     // Load modules
     this.moduleService.getModules()
@@ -51,5 +64,9 @@ export class LearnComponent {
     "characters": "",
     "creator": this.authService.getEmail()!,
     "id": ""
+  }
+
+  startQuiz() {
+    this.router.navigate(["/quiz", this.moduleSelected.id])
   }
 }

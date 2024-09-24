@@ -61,6 +61,31 @@ export class AuthService {
         return this.firebaseAuth.currentUser?.email;
     }
 
+    async getLevel(): Promise<number> {
+        const email = this.getEmail();
+        if (typeof email === 'string') {
+                try {
+                    const data = await this.database.fetchDocumentById('users', email);
+                    return Number(data.level);
+                } catch (error) {
+                    console.log("Error fetching level:", error);
+                    return 0;
+                }
+        } else {
+                console.log("Error fetching email");
+                return 0;
+        }
+    }
+
+    async levelUp(completedLevel: number | string): Promise<void> {
+        const email = await this.getEmail();
+        const currentLevel = await this.getLevel();
+        const newLevel = Number(completedLevel) + 1;
+        if (newLevel > currentLevel) {
+            this.database.updateField('users', email!, 'level', newLevel)
+        }
+    }
+
     async isAdmin(): Promise<boolean> {
         const email = this.getEmail();
         if (typeof email === 'string') {
