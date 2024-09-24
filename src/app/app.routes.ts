@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { redirectUnauthorizedTo, redirectLoggedInTo, canActivate } from '@angular/fire/compat/auth-guard';
-import { QuizGuard } from './guards/Quiz.guard';
+import { QuizGuard } from './guards/quiz.guard';
 
 // Components
 import { LandingComponent } from './components/landing/landing.component';
