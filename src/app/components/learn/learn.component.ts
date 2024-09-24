@@ -8,6 +8,7 @@ import { ModuleService } from '../../services/module.service';
 import { ModuleInterface } from '../../utils/module.interface';
 import { Router } from '@angular/router';
 import { response } from 'express';
+import Module from 'node:module';
 
 @Component({
   selector: 'app-learn',
@@ -64,6 +65,23 @@ export class LearnComponent {
     "characters": "",
     "creator": this.authService.getEmail()!,
     "id": ""
+  }
+
+  startModule(module: ModuleInterface): void {
+    this.showAddModule = false;
+    this.currentPage = 0;
+    if (this.userLevel >= Number(module.id)) {
+      this.moduleSelected = module;
+    } else {
+      const lockedModule: ModuleInterface = {
+        name: "Locked Module",
+        content: [{text: "You must finish the previous module to level up, then you'll gain access to this module."}],
+        characters: "locked",
+        creator: "",
+        id: ""
+       }
+      this.moduleSelected = lockedModule;
+    }
   }
 
   startQuiz() {
